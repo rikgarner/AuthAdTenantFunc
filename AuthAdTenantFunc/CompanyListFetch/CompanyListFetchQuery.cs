@@ -11,10 +11,28 @@ using MediatR;
 
 namespace AuthAdTenantFunc
 {
-    public class CompanyListFetchQuery : IRequest<IEnumerable<CompanyModel>>
+    public class CompanyListFetchQuery : IRequest<IEnumerable<CompanyModel>>, ILoggableData
     {
         public int PageSize { get; set; }
+        public int PageNumber { get; set; }
+        public string Dump()
+        {
+            var b = Props().Aggregate("", (buffer, item) => string.Concat(buffer, $"{item};"));
+            return b;
+        }
+
+        public string[] DumpProps()
+        {
+            return new []{$"PageSize:{PageSize}"};
+        }
+
+        internal IEnumerable<string> Props()
+        {
+            yield return $"PageSize:{PageSize}";
+            yield return $"PageNumber:{PageNumber}";
+        }
     }
+
     public class CompanyListFetchQueryHandler : IRequestHandler<CompanyListFetchQuery, IEnumerable<CompanyModel>>
     {
         public Task<IEnumerable<CompanyModel>> Handle(CompanyListFetchQuery request,
@@ -33,7 +51,7 @@ namespace AuthAdTenantFunc
                 await dbConnection.OpenAsync();
                 var results = await dbConnection.QueryAsync<CompanyModel>("SELECT * FROM Core.Company ");
                 await dbConnection.CloseAsync();
-                return results;
+                return results.Take(6);
             }
             
         }

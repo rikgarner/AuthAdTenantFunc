@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MediatR;
@@ -22,16 +23,16 @@ namespace AuthAdTenantFunc
             _mediator = mediator;
         }
         [FunctionName("CompanyListFetchQuery")]
-        public  async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] //HttpRequest req,
-          //  UserGhostStateUpdateStateModel userGhostStateUpdateStateModel,
+        public  async Task<IActionResult> CompanyListFetchQuery(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]
             CompanyListFetchQuery companyListFetchQuery,
-            ILogger log, ClaimsPrincipal principal)
+            ILogger log, 
+            ClaimsPrincipal principal
+           )
         {
-            log.LogInformation("C# HTTP trigger function CompanyListFetch.");
-
-            //var result = new List<string>();
-            //result.Add("Tesco");
+            const string functionName = "CompanyListFetchQuery";
+            log.LogInformation($"Invoke:{functionName}");
+            log.LogTrace( companyListFetchQuery.Dump());
 
             var result = await _mediator.Send(companyListFetchQuery);
             return new OkObjectResult(result);
