@@ -2,7 +2,7 @@
 {
     public interface ILoggableData
     {
-        //string Dump();
-        string[] DumpProps();
+        string Dump();
+        //string[] DumpProps();
     }
 }
