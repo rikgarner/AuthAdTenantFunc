@@ -8,5 +8,6 @@ namespace AuthAdTenantFunc.CompanyListFetch
     {
         public string CompanyName { get; set; }
         public string CompanyRef { get; set; }
+        public int  CompanyId { get; set; }
     }
 }

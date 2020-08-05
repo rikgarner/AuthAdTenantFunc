@@ -6,5 +6,6 @@ namespace AuthAdTenantFunc
 {
     public class CommandResult
     {
+        public int RowCount { get; set; }
     }
 }
