@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace AuthAdTenantFunc
 {
-    public  class CompanyListFetchQueryFunction
+    public  class CompanyListFetchQueryFunction : FunctionBase
     {
         private readonly IMediator _mediator;
 
@@ -33,7 +33,7 @@ namespace AuthAdTenantFunc
             const string functionName = "CompanyListFetchQuery";
             log.LogInformation($"Invoke:{functionName}");
             log.LogTrace( companyListFetchQuery.Dump());
-
+            if (!CheckAuthenticated(principal, log)) return new UnauthorizedResult();
             var result = await _mediator.Send(companyListFetchQuery);
             return new OkObjectResult(result);
 

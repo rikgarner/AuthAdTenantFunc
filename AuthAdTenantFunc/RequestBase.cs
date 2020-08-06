@@ -11,7 +11,7 @@ namespace AuthAdTenantFunc
 
         protected virtual IEnumerable<string> Props()
         {
-            throw new NotImplementedException();
+            return Enumerable.Empty<string>();
         }
         public string Dump()
         {
