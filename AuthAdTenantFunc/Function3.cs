@@ -15,7 +15,7 @@ namespace AuthAdTenantFunc
         [FunctionName("Function3")]
         public   async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            UserGhostStateUpdateStateModel model,
+           // UserGhostStateUpdateStateModel model,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger Function3");
