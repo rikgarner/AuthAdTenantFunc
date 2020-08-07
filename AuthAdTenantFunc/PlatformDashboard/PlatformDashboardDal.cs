@@ -34,9 +34,20 @@ namespace AuthAdTenantFunc.PlatformDashboard
                 var genderData = data.Read<PlatformStatisticGenderModel>().ToList();
                 statisticModel.GenderBreakdown = genderData;
 
+                var veriData = data.Read<PlatformStatisticVerificationModel>().ToList();
+                statisticModel.VerificationBreakdown = veriData;
+
+                statisticModel.CompletionBreakdown = data.Read<PlatformStatisticCompletionTypeModel>().ToList();
+
+                statisticModel.InvitationTypeBreakdown = data.Read<PlatformStatisticInvitationTypeModel>().ToList();
+
+                statisticModel.ProfileTypeBreakdown = data.Read<PlatformStatisticProfileTypeModel>().ToList();
+
                 await dbConnection.CloseAsync();
                 return statisticModel;
             }
         }
     }
+
+  
 }
