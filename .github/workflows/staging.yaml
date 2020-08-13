@@ -1,4 +1,4 @@
-ame: Deploy DotNet project to Azure Function App
+name: Deploy to Staging
 
 on:
   push:
