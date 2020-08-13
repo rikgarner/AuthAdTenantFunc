@@ -1,4 +1,4 @@
-name: Deploy Azure Function App to Staging Slot
+name: Deploy to Staging
 
 on:
   push:
